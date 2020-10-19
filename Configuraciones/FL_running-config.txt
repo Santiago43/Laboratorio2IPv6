@@ -1,0 +1,142 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname FL
+!
+!
+!
+enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+username SPAL password 7 08325C4F0526372E21223351
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 209.100.2.1 255.255.255.0
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial1/0
+ bandwidth 500000
+ ip address 190.85.212.6 255.255.255.252
+ clock rate 2000000
+!
+interface Serial1/1
+ bandwidth 500000
+ ip address 190.85.212.14 255.255.255.252
+ ip ospf 24 area 0
+!
+interface Serial1/2
+ bandwidth 500000
+ ip address 190.85.212.21 255.255.255.252
+!
+interface Serial1/3
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial1/4
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial1/5
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial1/6
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial1/7
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 1
+ eigrp router-id 1.1.1.3
+ redistribute ospf 24 
+ network 190.85.212.4 0.0.0.3
+ network 190.85.212.20 0.0.0.3
+ network 190.85.0.0
+ auto-summary
+!
+router ospf 24
+ router-id 1.1.1.3
+ log-adjacency-changes
+ redistribute eigrp 1 
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+banner motd Lavate las manos y quedate en casa c:
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 120
+ password 7 08325C4F0526372E21223351
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0 4
+ exec-timeout 0 120
+ password 7 08325C4F0526372E21223351
+ logging synchronous
+ login
+!
+!
+!
+end
+

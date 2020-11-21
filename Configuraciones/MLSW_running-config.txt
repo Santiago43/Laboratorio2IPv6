@@ -7,8 +7,6 @@ service password-encryption
 hostname MLSW
 !
 !
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
-!
 !
 !
 !
@@ -23,8 +21,6 @@ ipv6 dhcp pool ESP
  dns-server 2001:4860:4860::8888
 !
 !
-!
-username SPAL password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -147,11 +143,11 @@ banner motd Lavate las manos y quedate en casa c:
 !
 !
 !
+logging trap debugging
+logging 190.85.202.30
 line con 0
  exec-timeout 0 120
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
 !
 line aux 0
 !

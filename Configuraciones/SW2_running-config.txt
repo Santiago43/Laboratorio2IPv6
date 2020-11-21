@@ -6,12 +6,8 @@ service password-encryption
 !
 hostname SW2
 !
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
 !
 !
-!
-!
-username SPAL privilege 1 password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -89,11 +85,11 @@ interface Vlan99
 banner motd Lavate las manos y quedate en casa c:
 !
 !
+snmp-server community TECNOLOGIA RO
+snmp-server community TEGNOLOGIA_pub RW
 !
 line con 0
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
  exec-timeout 0 120
 !
 line vty 0 4

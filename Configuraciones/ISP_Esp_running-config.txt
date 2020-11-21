@@ -1,14 +1,12 @@
 !
 version 12.4
-no service timestamps log datetime msec
+service timestamps log datetime msec
 no service timestamps debug datetime msec
 service password-encryption
 !
 hostname ISP_Esp
 !
 !
-!
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
 !
 !
 !
@@ -21,8 +19,6 @@ ipv6 unicast-routing
 no ipv6 cef
 !
 !
-!
-username SPAL password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -64,7 +60,7 @@ interface Tunnel1
 !
 !
 interface FastEthernet0/0
- no ip address
+ ip address 190.85.212.29 255.255.255.252
  duplex auto
  speed auto
 !
@@ -123,6 +119,7 @@ interface Vlan1
 !
 router eigrp 1
  eigrp router-id 1.1.1.4
+ redistribute connected 
  network 190.85.212.20 0.0.0.3
  auto-summary
 !
@@ -150,11 +147,12 @@ banner motd Lavate las manos y quedate en casa c:
 !
 !
 !
+logging trap debugging
+logging 190.85.202.30
+logging 190.85.212.30
 line con 0
  exec-timeout 0 120
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
 !
 line aux 0
 !
@@ -165,6 +163,8 @@ line vty 0 4
  login
 !
 !
+ntp server 190.85.212.26
+ntp update-calendar
 !
 end
 

@@ -4,11 +4,9 @@ no service timestamps log datetime msec
 no service timestamps debug datetime msec
 service password-encryption
 !
-hostname R2_Esp
+hostname R2_ESP
 !
 !
-!
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
 !
 !
 !
@@ -21,11 +19,9 @@ ipv6 unicast-routing
 no ipv6 cef
 !
 ipv6 dhcp pool ESP
- dns-server 2001:4680:4860::8888
+ dns-server 2001:1200:C2:3:20C:CFFF:FE51:578C
 !
 !
-!
-username SPAL password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -143,6 +139,12 @@ ipv6 route ::/0 Serial1/0 99
 ipv6 access-list ESP
  deny tcp 2001:1200:B2::/64 host 2001:1200:A2:2:201:C7FF:FE83:61ED eq www
  permit tcp 2001:1200:B2:1::/64 host 2001:1200:A2:2:201:C7FF:FE83:61ED eq www
+ permit udp 2001:1200:B2:1::/64 host 2001:1200:B2:1::1 eq snmp
+ deny udp 2001:1200:B2::/64 host 2001:1200:B2::1 eq snmp
+ permit ipv6 any any
+ipv6 access-list BOG
+ permit udp 2001:1200:B2:1::/64 2001:1200:B2::/48 eq snmp
+ deny udp 2001:1200:B2::/64 2001:1200:B2::/48 eq snmp
  permit ipv6 any any
 !
 banner motd Lavate las manos y quedate en casa c:
@@ -150,12 +152,14 @@ banner motd Lavate las manos y quedate en casa c:
 !
 !
 !
+snmp-server community VICEPRESIDENCIA_rw RW
+snmp-server community VICEPRESIDENCIA_ro RO
 !
+logging trap debugging
+logging 190.85.202.30
 line con 0
  exec-timeout 0 120
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
 !
 line aux 0
 !

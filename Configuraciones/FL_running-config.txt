@@ -1,14 +1,12 @@
 !
 version 12.4
-no service timestamps log datetime msec
+service timestamps log datetime msec
 no service timestamps debug datetime msec
 service password-encryption
 !
 hostname FL
 !
 !
-!
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
 !
 !
 !
@@ -19,8 +17,6 @@ no ip cef
 no ipv6 cef
 !
 !
-!
-username SPAL password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -122,11 +118,10 @@ banner motd Lavate las manos y quedate en casa c:
 !
 !
 !
+logging 190.85.212.30
 line con 0
  exec-timeout 0 120
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
 !
 line aux 0
 !
@@ -137,6 +132,8 @@ line vty 0 4
  login
 !
 !
+ntp server 190.85.212.26
+ntp update-calendar
 !
 end
 

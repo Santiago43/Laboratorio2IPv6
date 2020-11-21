@@ -6,13 +6,9 @@ service password-encryption
 !
 hostname SW5
 !
-enable secret 5 $1$mERr$/6E8Oc/V3adp8.aSFDKhy0
-!
 !
 !
 no ip domain-lookup
-!
-username SPAL privilege 1 password 7 08325C4F0526372E21223351
 !
 !
 !
@@ -81,13 +77,15 @@ interface Vlan1
  no ip address
 !
 banner motd No olvides lavarte las manos y quedate en casa c:
+logging trap debugging
+logging 190.85.202.30
 !
 !
+snmp-server community VICEPRESIDENCIA RO
+snmp-server community VICEPRESIDENCIA_pub RW
 !
 line con 0
- password 7 08325C4F0526372E21223351
  logging synchronous
- login local
  exec-timeout 0 120
 !
 line vty 0 4
